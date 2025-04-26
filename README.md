@@ -1,4 +1,4 @@
 
-# GENERATIVE MACHINE | PROMPT MACHINE
+# GENERATIVE JUNKIE | PROMPT MACHINE
 
-This is a prompt generation tool with real-time translation, built for deployment on Vercel.
+Enter your keyword, and automatically generate a professional-level custom prompt via GPT-4. Built for instant Vercel deployment.
