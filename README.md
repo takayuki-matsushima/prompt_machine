@@ -1,5 +1,4 @@
 
-# GENERATIVE MACHINE 2
+# GENERATIVE MACHINE | PROMPT MACHINE
 
-This is the "PROMPT MACHINE" that generates professional-level prompts using AI.
-Built for easy deployment on GitHub + Vercel.
+This is a prompt generation tool with real-time translation, built for deployment on Vercel.
