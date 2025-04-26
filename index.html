@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENERATIVE MACHINE | PROMPT MACHINE</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    header {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    header img {
+      height: 40px;
+    }
+    .hero {
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .hero h1 {
+      font-size: 64px;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+    .hero h2 {
+      font-size: 48px;
+      margin: 10px 0 0 0;
+      letter-spacing: 1px;
+    }
+    .hero button {
+      font-size: 24px;
+      padding: 16px 32px;
+      background: none;
+      border: 2px solid #fff;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 40px;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #111;
+      color: #fff;
+      border: 1px solid #333;
+    }
+    button.generate, button.copy, button.show-history {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      background: #fff;
+      color: #000;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-top: 20px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 10px;
+    }
+    .footer-logo {
+      margin: 60px 0 20px;
+      text-align: center;
+    }
+    .footer-logo img {
+      height: 40px;
+      opacity: 0.8;
+    }
+    footer {
+      padding: 20px;
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="gj_logo_white.png" alt="GENERATIVE JUNKIE Logo">
+  </header>
+
+  <div class="hero">
+    <h1>GENERATIVE MACHINE</h1>
+    <h2>PROMPT MACHINE</h2>
+    <button onclick="scrollToForm()">START</button>
+  </div>
+
+  <section id="form">
+    <h2>PROMPT MACHINE</h2>
+    <input type="text" id="keyword" placeholder="Add your keywords (optional)" oninput="saveInput()">
+    <select id="taste">
+      <option value="MUSIC">MUSIC</option>
+      <option value="PSYCHEDELIC">PSYCHEDELIC</option>
+      <option value="BUDDHA">BUDDHA</option>
+      <option value="MINIMAL">MINIMAL</option>
+      <option value="NATURE">NATURE</option>
+    </select>
+    <label style="display:block; margin-top: 20px;">
+      <input type="checkbox" id="useGJstyle" checked>
+      <span style="margin-left:8px;">Use GENERATIVE AI prompt style</span>
+    </label>
+    <button class="generate" onclick="generatePrompt()">GENERATE PROMPT!</button>
+    <textarea id="output" readonly></textarea>
+    <button class="copy" onclick="copyPrompt()">COPY PROMPT</button>
+    <button class="show-history" onclick="showHistory()">SHOW PROMPT HISTORY</button>
+  </section>
+
+  <div class="footer-logo">
+    <img src="gj_logo_white.png" alt="GENERATIVE JUNKIE Logo">
+  </div>
+  <footer>
+    © 2025 GENERATIVE MACHINE
+  </footer>
+
+  <script>
+    function scrollToForm() {
+      document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function generatePrompt() {
+      const keyword = document.getElementById('keyword').value;
+      const taste = document.getElementById('taste').value;
+      const useGJ = document.getElementById('useGJstyle').checked;
+
+      let systemPrompt = useGJ
+        ? "You are a professional AI visual prompt engineer. Create a highly detailed, stylistic, vivid prompt for visual generation with " + taste + " taste."
+        : "Create a simple beginner-friendly image generation prompt with " + taste + " taste.";
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        body: JSON.stringify({
+          model: "gpt-4",
+          messages: [
+            { "role": "system", "content": systemPrompt },
+            { "role": "user", "content": keyword }
+          ]
+        })
+      });
+      const data = await response.json();
+      document.getElementById('output').value = data.choices[0].message.content;
+    }
+
+    function copyPrompt() {
+      const output = document.getElementById('output');
+      output.select();
+      document.execCommand('copy');
+      saveHistory(output.value);
+      alert('Copied!');
+    }
+
+    function saveInput() {
+      const keyword = document.getElementById('keyword').value;
+      localStorage.setItem('lastKeyword', keyword);
+    }
+
+    function saveHistory(text) {
+      let history = JSON.parse(localStorage.getItem('promptHistory') || '[]');
+      history.unshift(text);
+      if (history.length > 10) history.pop();
+      localStorage.setItem('promptHistory', JSON.stringify(history));
+    }
+
+    function showHistory() {
+      const history = JSON.parse(localStorage.getItem('promptHistory') || '[]');
+      alert(history.join("\n\n---\n\n"));
+    }
+  </script>
+</body>
+</html>
