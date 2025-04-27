@@ -1,0 +1,13 @@
+
+{
+  "name": "my-simple-bot",
+  "version": "1.0.0",
+  "description": "A simple Discord bot base project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.13.0"
+  }
+}
