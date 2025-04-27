@@ -158,7 +158,11 @@
         })
       });
       const data = await response.json();
-      document.getElementById('output').value = data.data.translations[0].translatedText;
+      if (data && data.data && data.data.translations) {
+        document.getElementById('output').value = data.data.translations[0].translatedText;
+      } else {
+        document.getElementById('output').value = "Translation error.";
+      }
     }
 
     function copyPrompt() {

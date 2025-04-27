@@ -1,4 +1,4 @@
 
 # GENERATIVE JUNKIE | PROMPT MACHINE
 
-Super lightweight version: Copy, History, and Reset only. Google Translate enabled.
+Full version: Real-time Google Translation + Copy/History/Reset. Ultra minimal and ultra fast.
