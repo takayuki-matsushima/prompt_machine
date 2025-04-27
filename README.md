@@ -1,4 +1,4 @@
 
 # GENERATIVE JUNKIE | PROMPT MACHINE
 
-Using Google Gemini API. Lightweight and super fast. Mini-sized 'Generate Your Prompt' heading.
+Super lightweight version: Copy, History, and Reset only. Google Translate enabled.
