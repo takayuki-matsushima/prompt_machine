@@ -12,24 +12,29 @@
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
+      height: 100vh;
+      overflow-x: hidden;
     }
     .hero {
-      padding: 60px 20px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
     }
     .hero h1 {
       font-size: 72px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
+      margin: 0;
     }
     .hero h2 {
       font-size: 48px;
-      letter-spacing: 1px;
-      margin-bottom: 40px;
+      margin: 10px 0 40px;
     }
     .hero button {
       font-size: 24px;
       padding: 16px 32px;
-      margin-top: 20px;
       background: none;
       border: 2px solid #fff;
       color: #fff;
@@ -167,7 +172,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
+          "Authorization": "Bearer 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"
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo",
