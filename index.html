@@ -46,8 +46,9 @@
       margin: auto;
     }
     #form h3 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: normal;
     }
     input {
       width: 100%;
@@ -105,7 +106,7 @@
         padding: 12px 24px;
       }
       #form h3 {
-        font-size: 32px;
+        font-size: 12px;
       }
     }
   </style>
@@ -119,7 +120,7 @@
 
   <section id="form">
     <h3>Generate Your Prompt</h3>
-    <input type="text" id="keyword" placeholder="Enter your keyword..." oninput="translateInput()">
+    <input type="text" id="keyword" placeholder="Enter your keyword..." oninput="handleInput()">
     <div class="button-group">
       <button class="action" onclick="generatePrompt()">GENERATE</button>
       <button class="action" onclick="copyPrompt()">COPY</button>
@@ -140,50 +141,35 @@
       document.getElementById('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    async function translateInput() {
-      const text = document.getElementById('keyword').value;
-      if (!text) {
-        document.getElementById('output').value = "";
-        return;
-      }
-      const response = await fetch('https://translation.googleapis.com/language/translate/v2?key=AIzaSyBWR48q-E_S9Un-IasSsnyCwPZxqOKqas0', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          q: text,
-          source: 'ja',
-          target: 'en',
-          format: 'text'
-        })
-      });
-      const data = await response.json();
-      document.getElementById('output').value = data.data.translations[0].translatedText;
+    async function handleInput() {
+      // 入力リアルタイム処理なし（Google Geminiで一括生成するため）
     }
 
     async function generatePrompt() {
-      const keyword = document.getElementById('output').value;
+      const keyword = document.getElementById('keyword').value;
       if (!keyword) {
         alert("Please enter a keyword!");
         return;
       }
       document.getElementById('output').value = "Generating prompt... Please wait...";
 
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCrHAOYxVaJllPxyFJx4zkEYVutXcwd4OE", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            { "role": "system", "content": "You are a professional AI visual prompt engineer. Create a highly detailed, vivid, artistic prompt for image generation based on the following keyword." },
-            { "role": "user", "content": keyword }
+          contents: [
+            {
+              parts: [
+                { text: "Create a detailed, vivid, imaginative English prompt for visual image generation based on the following keyword: " + keyword }
+              ]
+            }
           ]
         })
       });
       const data = await response.json();
-      document.getElementById('output').value = data.choices[0].message.content;
+      document.getElementById('output').value = data.candidates[0].content.parts[0].text;
     }
 
     function copyPrompt() {
