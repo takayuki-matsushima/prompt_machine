@@ -36,26 +36,26 @@
       cursor: pointer;
     }
     section {
-      padding: 20px;
+      padding: 100px 20px;
       max-width: 800px;
       margin: auto;
     }
     input {
       width: 100%;
-      padding: 12px;
+      padding: 16px;
       margin: 10px 0;
       background: #111;
       border: 1px solid #444;
       color: #fff;
-      font-size: 16px;
+      font-size: 18px;
     }
     .button-group {
       margin-top: 20px;
     }
     button.action {
-      padding: 8px 16px;
+      padding: 12px 24px;
       margin: 5px;
-      font-size: 14px;
+      font-size: 18px;
       background: transparent;
       border: 1px solid #fff;
       color: #fff;
@@ -64,12 +64,12 @@
     }
     textarea {
       width: 100%;
-      height: 150px;
+      height: 180px;
       background: #111;
       color: #fff;
       margin-top: 20px;
-      padding: 10px;
-      font-size: 16px;
+      padding: 16px;
+      font-size: 18px;
       border: 1px solid #444;
     }
     .footer-logo {
@@ -124,7 +124,7 @@
 
   <script>
     function scrollToForm() {
-      document.getElementById('form').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     async function translateInput() {
@@ -159,7 +159,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer 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"
+          "Authorization": "Bearer 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"
         },
         body: JSON.stringify({
           model: "gpt-4",
