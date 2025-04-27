@@ -35,10 +35,14 @@
       color: #fff;
       cursor: pointer;
     }
-    section {
-      padding: 100px 20px;
+    #form {
+      padding: 150px 20px;
       max-width: 800px;
       margin: auto;
+    }
+    #form h3 {
+      font-size: 48px;
+      margin-bottom: 20px;
     }
     input {
       width: 100%;
@@ -95,6 +99,9 @@
         font-size: 18px;
         padding: 12px 24px;
       }
+      #form h3 {
+        font-size: 32px;
+      }
     }
   </style>
 </head>
@@ -106,6 +113,7 @@
   </div>
 
   <section id="form">
+    <h3>Generate Your Prompt</h3>
     <input type="text" id="keyword" placeholder="Enter your keyword..." oninput="translateInput()">
     <div class="button-group">
       <button class="action" onclick="generatePrompt()">GENERATE</button>
@@ -162,7 +170,7 @@
           "Authorization": "Bearer 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"
         },
         body: JSON.stringify({
-          model: "gpt-4",
+          model: "gpt-3.5-turbo",
           messages: [
             { "role": "system", "content": "You are a professional AI visual prompt engineer. Create a highly detailed, vivid, artistic prompt for image generation based on the following keyword." },
             { "role": "user", "content": keyword }

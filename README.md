@@ -1,4 +1,4 @@
 
 # GENERATIVE JUNKIE | PROMPT MACHINE
 
-Enter a keyword, instantly translate it, and generate a professional custom prompt via GPT-4. Ready for Vercel deployment.
+Super fast version using GPT-3.5-turbo. Enter a keyword, get instant translation, and create a detailed custom prompt.
