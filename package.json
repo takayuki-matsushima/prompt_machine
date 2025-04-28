@@ -1,13 +1,16 @@
-
 {
-  "name": "my-simple-bot",
+  "name": "prompt-machine",
   "version": "1.0.0",
-  "description": "A simple Discord bot base project",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "start": "node index.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "discord.js": "^14.13.0"
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "translate-google": "latest"
   }
 }
